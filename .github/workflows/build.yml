@@ -62,4 +62,46 @@ jobs:
 
       - name: Run linter
         run: npx standard --verbose
+  upload_artifacts:
+    runs-on: ubuntu-latest
+    needs: [build, lint]
+    outputs:
+      artifact_name: ${{ steps.read_artifact_name.outputs.artifact_name }}
+    steps:
+      - name: Archive production artifacts
+        id: set_artifact_name
+        shell: bash
+        run: |
+            TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+            echo "dist-${TIMESTAMP}" > artifact_name.txt
+      - name: Read artifact name
+        id: read_artifact_name
+        run: echo "artifact_name=$(cat artifact_name.txt)" >> $GITHUB_OUTPUT
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.read_artifact_name.outputs.artifact_name }}
+          path: |
+            dist
+            !dist/**/*.md
+  download_artifacts:
+    runs-on: ubuntu-latest
+    needs: upload_artifacts
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.upload_artifacts.outputs.artifact_name }}
+        
+      - name: List all files
+        run: |
+          echo "Listing all files in the current directory:"
+          ls -l
+        shell: bash
+            
+      - name: List downloaded artifacts
+        run: |
+          echo "Downloaded artifacts from the previous job."
+          ls -l dist
+        shell: bash
