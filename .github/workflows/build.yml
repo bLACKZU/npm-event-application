@@ -95,6 +95,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Create dire
+        run: |
+            mkdir -p dist
+            cd dist/
+            pwd
+        
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
