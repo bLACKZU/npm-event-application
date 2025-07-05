@@ -67,6 +67,12 @@ jobs:
           path: |
             dist
             !dist/**/*.md
+      - name: List all files
+        run: |
+          pwd
+          echo "Listing all files in the current directory:"
+          ls -l
+        shell: bash      
   lint:
     runs-on: ubuntu-latest
     steps:
