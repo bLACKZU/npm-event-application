@@ -108,7 +108,6 @@ jobs:
           pwd
           echo "Listing all files in the current directory:"
           ls -l
-          cd dist/
         shell: bash
 
       - name: List downloaded artifacts
@@ -116,4 +115,6 @@ jobs:
           pwd
           echo "Downloaded artifacts from the previous job."
           ls -l dist
+          cat dist/server.js
+
         shell: bash
