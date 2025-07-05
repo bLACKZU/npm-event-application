@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
-const dataStore = []; // 👈 holds submitted objects
+const dataStore = [] // 👈 holds submitted objects
 
 app.post('/data', (req, res) => {
   console.log('Request received at /data')
@@ -16,12 +16,10 @@ app.get('/data', (req, res) => {
   res.json(dataStore)
 })
 
-//routing path
+// routing path
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
-
 
 // Start the server
 app.listen(3000, () => {

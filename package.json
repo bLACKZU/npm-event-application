@@ -15,7 +15,8 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mongodb": "^6.17.0",
-    "mongoose": "^8.16.1"
+    "mongoose": "^8.16.1",
+    "standard": "^17.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.0",
