@@ -96,6 +96,7 @@ jobs:
         
       - name: List all files
         run: |
+          pwd
           echo "Listing all files in the current directory:"
           ls -l
         shell: bash
