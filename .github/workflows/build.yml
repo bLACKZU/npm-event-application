@@ -99,12 +99,12 @@ jobs:
       
   download_artifacts:
     runs-on: ubuntu-latest
-    needs: build
+    needs: scan_and_build
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.build.outputs.artifact_name }}
+          name: ${{ needs.scan_and_build.outputs.artifact_name }}
           path: dist
 
       - name: List all files
